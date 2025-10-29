@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Player SD</title>
+
+    <!-- Clappr -->
+    <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/clappr-level-selector-plugin@latest/dist/level-selector.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://kltraid.pages.dev/css/sdplayer.css">
+
+    <!-- TOOLS -->
+		<script src="https://kltraid.pages.dev/js/cors.js"></script>
+		<script src="https://kltraid.pages.dev/js/hitstats.js"></script>		
+    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+		
+		<!-- ADS -->
+		<script src="https://kltraid.pages.dev/js/smartlink-rotator.js"></script>
+
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loaderContainer" class="loader-container hidden">
+        <div class="loader"></div>
+        <div>Waiting streams</div>
+    </div>
+
+    <!--
+    <button id="pageShareBtn" class="page-share-btn" title="Copy embed">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 16.08C17.24 16.08 16.56 16.38 16.05 16.88L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.16C16.5 7.68 17.22 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.84C7.5 9.32 6.78 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.78 15 7.5 14.68 8.04 14.16L15.14 18.34C15.09 18.56 15.05 18.78 15.05 19C15.05 20.66 16.39 22 18.05 22C19.71 22 21.05 20.66 21.05 19C21.05 17.34 19.71 16 18.05 16Z" />
+        </svg>
+    </button>
+    <div id="copyToast" class="copy-toast">Embed code copied</div>
+	-->
+
+    <!-- Clappr Player -->
+    <div id="player" class="hidden"></div>
+
+    <!-- Iframe fallback & YouTube -->
+		<iframe id="fallbackIframe" class="hidden" allowfullscreen scrolling="no" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" style="position:fixed; top:0; left:0; width:100%; height:100%;"></iframe>
+
+    <script>
+        const NO_REFERRER_DOMAINS = ['jwplive', 'inplaynet', 'bbapcall'];
+        const EXCLUDED_IFRAME_DOMAINS = ['embednow.top', 'topembed.pw', 'sindikasi.inews.id', 'voodc.com'];
+				const FORCE_IFRAME_DOMAINS = ['567440.com'];
+    </script>
+
+    <script src="https://kltraid.pages.dev/js/playersd.js"></script>
+</body>
+
+</html>
