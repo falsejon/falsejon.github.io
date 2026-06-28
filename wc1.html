@@ -962,7 +962,7 @@ body {
 </style>
 <meta content='ca-host-pub-1556223355139109' name='google-adsense-platform-account'/>
 <meta content='blogspot.com' name='google-adsense-platform-domain'/>
-<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2668062166632706500&amp;zx=17f16d23-2ade-4e2e-a50f-242e82c3efb0' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2668062166632706500&amp;zx=17f16d23-2ade-4e2e-a50f-242e82c3efb0' rel='stylesheet'/></noscript>
+<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2668062166632706500&amp;zx=feddcfc9-a1f3-4071-aa6f-03ef376d289d' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2668062166632706500&amp;zx=feddcfc9-a1f3-4071-aa6f-03ef376d289d' rel='stylesheet'/></noscript>
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 
@@ -982,37 +982,258 @@ body {
 <a href='https://www.streamurl99.online/p/wc1.html?m=1'>WC1</a>
 </h2>
 <div class='post-body entry-content'>
-<div id='summary1876388831195134755'><div id="player"></div>
+<div id='summary1876388831195134755'><!--DOCTYPE html-->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW + Shaka Multiplayer</title>
+
+<!-- ================= CONFIG CHANNEL ================= -->
 <script>
-    var playerInstance = jwplayer("player");
-    playerInstance.setup({
-        playlist: [{
-            "title": "",
-            "sources": [
-                {
-                    "default": false,
-                    "type": "dash",
-                    "file": 'https://qp-pldt-live-bpk-ucd-prod.akamaized.net/bpk-tv/ch299/default/index.mpd',
-                    "drm": {
-                        "clearkey": { "keyId": "549ab7cd35a64bb6bb479ecead04d69d", "key": "829799ed534d11fcadeb4b192467e050" }
-                    },
-                    "label": "0"
-                }
-            ]
-        }],
-        width: "100%",
-        height: "100%",
-        aspectratio: "16:9",
-        autostart: true,
-			 logo: {
- 					 file: '',
- 					 link: '',
-  						position: 'top-right'
-  					},
-			cast:{},
-			sharing: {}
-    });
+const streams = [
+  {
+    title: "Link 1",
+    type: "dash",
+    file: "https://qp-pldt-live-bpk-ucd-prod.akamaized.net/bpk-tv/fifa_ppv1/default/index.mpd",
+    keyId: "2c338a117d434ce4bbe3569231af90f1",
+    key:   "a9633d901ee8a3f4f58ac314b5c5f4fb"
+  },
+  {
+    title: "Link 2",
+    type: "hls",
+    file: "https://example.com/live.m3u8"
+  }
+];
+</script>  
+
+<!-- ================= SHAKA (YOUTUBE THEME) ================= -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/shaka-player@4.14.10/dist/shaka-player.ui.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/shaka-player@4.14.10/dist/controls.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons+Sharp" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ZheHacK/fypnews.id@main/css/youtube-theme.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- ================= JW PLAYER ================= -->
+<script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+<script>
+jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";
 </script>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  background:#000;
+  color:#fff;
+  height:100%;
+  overflow:auto;
+  font-family:Arial,Helvetica,sans-serif;
+}
+#playerWrapper{
+  position:relative;
+  width:100%;
+  height:100vh;
+  background:#000;
+}
+#topbar{
+  position:absolute;
+  top:10px;
+  left:10px;
+  z-index:9999;
+  display:flex;
+  gap:10px;
+}
+.btn{
+  background:#ffcc00;
+  color:#000;
+  border:none;
+  padding:10px 16px;   /* diperbesar dari 8px 12px */
+  border-radius:6px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:16px;      /* tambahkan font size agar lebih besar */
+}
+
+select{
+  padding:8px;
+  border-radius:6px;
+  font-weight:700;
+}
+.playerBox{
+  position:absolute;
+  inset:0;
+}
+#jwBox{display:block;}
+#shakaBox{display:none;}
+
+.shaka-video-container{
+  position:fixed;
+  inset:0;
+}
+.shaka-video{
+  width:100%;
+  height:100%;
+}
+.shaka-play-button,
+.shaka-spinner-container{
+  transform:scale(0.8);
+}
+.shaka-video-container .material-icons-round{
+  color:#ff0000;
+}
+</style>
+</head>
+
+<body>
+
+<div id="playerWrapper">
+
+  <!-- ================= TOP BAR ================= -->
+  <div id="topbar">
+    <button class="btn" onclick="setPlayer('shaka')">Server 1</button>
+    <button class="btn" onclick="setPlayer('jw')">Server 2</button>
+    <select onchange="switchChannel(this.value)">
+      
+    </select>
+  </div>
+
+  <!-- ================= JW PLAYER ================= -->
+  <div class="playerBox" id="jwBox">
+    <div id="jwplayer"></div>
+  </div>
+
+  <!-- ================= SHAKA PLAYER (YOUTUBE THEME ASLI) ================= -->
+  <div class="playerBox" id="shakaBox">
+    <section id="wrap">
+      <div class="youtube-theme">
+        <video autoplay data-shaka-player id="youtube-theme"
+          poster=""
+          style="width:100vw;height:100vh"></video>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+let currentIndex = 0;
+let activePlayer = "jw";
+let shakaPlayer = null;
+
+/* ================= JW PLAYER ================= */
+function buildJW(){
+  const s = streams[currentIndex];
+
+  jwplayer("jwplayer").setup({
+    playlist:[{
+      sources:[{
+        file: s.file,
+        type: s.type,
+        drm: s.keyId ? {
+          clearkey:{
+            keyId: s.keyId,
+            key: s.key
+          }
+        } : undefined
+      }]
+    }],
+    width: "100%",
+    height: "100%",
+    aspectratio: "16:9",
+    autostart: true
+  });
+}
+
+/* ================= SHAKA PLAYER ================= */
+async function initShaka(){
+  const s = streams[currentIndex];
+  const video = document.getElementById("youtube-theme");
+  const ui = video.ui;
+
+  ui.configure({
+    seekBarColors:{
+      base:'rgba(255,255,255,.2)',
+      buffered:'rgba(255,255,255,.4)',
+      played:'rgb(255,0,0)'
+    }
+  });
+
+  const controls = ui.getControls();
+  const player = controls.getPlayer();
+
+  if(s.keyId && s.key){
+    player.configure({
+      drm:{ clearKeys:{ [s.keyId]: s.key } }
+    });
+  }
+
+  shakaPlayer = player;
+  await player.load(s.file);
+
+  $('.shaka-overflow-menu-button').html('settings');
+  $('.shaka-back-to-overflow-button .material-icons-round')
+    .html('arrow_back_ios_new');
+}
+
+/* ================= SWITCH PLAYER ================= */
+function setPlayer(p){
+  // 🔥 Tambahkan refresh jika pindah dari Shaka &#8594; JW
+  if(p === "jw" && activePlayer === "shaka"){
+    location.reload();
+    return;
+  }
+
+  activePlayer = p;
+
+  document.getElementById("jwBox").style.display =
+    p==="jw" ? "block" : "none";
+  document.getElementById("shakaBox").style.display =
+    p==="shaka" ? "block" : "none";
+
+  if(p==="jw"){
+    // bersihin Shaka + JW lama
+    if(shakaPlayer){
+      shakaPlayer.destroy();
+      shakaPlayer = null;
+    }
+    jwplayer("jwplayer").remove();
+    buildJW();
+  }else{
+    jwplayer("jwplayer").remove();
+    initShaka();
+  }
+}
+
+/* ================= SWITCH CHANNEL ================= */
+function switchChannel(i){
+  currentIndex = i;
+
+  if(activePlayer==="jw"){
+    jwplayer("jwplayer").remove();
+    buildJW();
+  }else{
+    if(shakaPlayer){
+      shakaPlayer.destroy();
+      shakaPlayer = null;
+    }
+    initShaka();
+  }
+}
+
+/* ================= INIT ================= */
+window.onload = () => {
+  jwplayer("jwplayer").remove();
+  buildJW();
+};
+</script>
+
+
+</body>
+</html>
 </div>
 <script type='text/javascript'>createSummaryAndThumb("summary1876388831195134755");
 </script>
@@ -1067,10 +1288,10 @@ body {
 <script src="//www.dynamicdrive.com/ddincludes/scriptsv21.js"></script>
 <!-- Cloudflare Pages Analytics --><script data-cf-beacon='{"token": "65325e27b64a41cd9afdd2f8ff3ffc9d"}' defer='defer' src='https://static.cloudflareinsights.com/beacon.min.js'></script><!-- Cloudflare Pages Analytics -->
 
-<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/387437488-widgets.js"></script>
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/3935100173-widgets.js"></script>
 <script type='text/javascript'>
-var BLOG_BASE_IMAGE_URL = 'https://resources.blogblog.com/img';var BLOG_LANG_DIR = 'ltr';window['__wavt'] = 'AEUoTZqUFeowB8O-FkfUrf95uah3:1781715915196';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d2668062166632706500','//www.streamurl99.online/p/wc1.html?m\x3d1','2668062166632706500');
-_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '2668062166632706500', 'title': 'streamurl', 'url': 'https://www.streamurl99.online/p/wc1.html?m\x3d1', 'canonicalUrl': 'https://www.streamurl99.online/p/wc1.html', 'homepageUrl': 'https://www.streamurl99.online/?m\x3d1', 'searchUrl': 'https://www.streamurl99.online/search', 'canonicalHomepageUrl': 'https://www.streamurl99.online/', 'blogspotFaviconUrl': 'https://www.streamurl99.online/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': true, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'id', 'localeUnderscoreDelimited': 'id', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': true, 'isMobileRequest': true, 'mobileClass': ' mobile', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22streamurl - Atom\x22 href\x3d\x22https://www.streamurl99.online/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22streamurl - RSS\x22 href\x3d\x22https://www.streamurl99.online/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22streamurl - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/2668062166632706500/posts/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-7265277404983630', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': true, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/cd96ebb13b57568d', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Dapatkan link', 'key': 'link', 'shareMessage': 'Dapatkan link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Bagikan ke Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Bagikan ke X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Bagikan ke Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27id\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': true, 'jumpLinkMessage': 'Read more \xbb', 'pageType': 'static_page', 'pageId': '1876388831195134755', 'pageName': 'WC1', 'pageTitle': 'streamurl: WC1', 'metaDescription': ''}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Tautan disalin ke papan klip!', 'ok': 'Oke', 'postLink': 'Tautan Pos'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Khusus', 'isResponsive': false, 'isAlternateRendering': true, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': true, 'title': 'WC1', 'description': '', 'url': 'https://www.streamurl99.online/p/wc1.html?m\x3d1', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': true, 'isPost': false, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'pageId': 1876388831195134755}}]);
+var BLOG_BASE_IMAGE_URL = 'https://resources.blogblog.com/img';var BLOG_LANG_DIR = 'ltr';window['__wavt'] = 'AEUoTZqOGEGVnst6lhL7aoatHjRW:1782675646072';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d2668062166632706500','//www.streamurl99.online/p/wc1.html?m\x3d1','2668062166632706500');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '2668062166632706500', 'title': 'streamurl', 'url': 'https://www.streamurl99.online/p/wc1.html?m\x3d1', 'canonicalUrl': 'https://www.streamurl99.online/p/wc1.html', 'homepageUrl': 'https://www.streamurl99.online/?m\x3d1', 'searchUrl': 'https://www.streamurl99.online/search', 'canonicalHomepageUrl': 'https://www.streamurl99.online/', 'blogspotFaviconUrl': 'https://www.streamurl99.online/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': true, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'id', 'localeUnderscoreDelimited': 'id', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': true, 'isMobileRequest': true, 'mobileClass': ' mobile', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22streamurl - Atom\x22 href\x3d\x22https://www.streamurl99.online/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22streamurl - RSS\x22 href\x3d\x22https://www.streamurl99.online/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22streamurl - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/2668062166632706500/posts/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-7265277404983630', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': true, 'boqCommentIframeForm': true, 'loginRedirectParam': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/ecd9ca2a5bef9569', 'plusOneApiSrc': 'https://apis.google.com/js/platform.js', 'disableGComments': true, 'interstitialAccepted': false, 'sharing': {'platforms': [{'name': 'Dapatkan link', 'key': 'link', 'shareMessage': 'Dapatkan link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Bagikan ke Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'X', 'key': 'twitter', 'shareMessage': 'Bagikan ke X', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Bagikan ke Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 0, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27id\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': true, 'jumpLinkMessage': 'Read more \xbb', 'pageType': 'static_page', 'pageId': '1876388831195134755', 'pageName': 'WC1', 'pageTitle': 'streamurl: WC1', 'metaDescription': ''}}, {'name': 'features', 'data': {}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Tautan disalin ke papan klip!', 'ok': 'Oke', 'postLink': 'Tautan Pos'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Khusus', 'isResponsive': false, 'isAlternateRendering': true, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': true, 'title': 'WC1', 'description': '', 'url': 'https://www.streamurl99.online/p/wc1.html?m\x3d1', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': true, 'isPost': false, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'pageId': 1876388831195134755}}]);
 _WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'mobile': true}, 'displayModeFull'));
 </script>
 </body>
