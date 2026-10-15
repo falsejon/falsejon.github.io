@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="referrer" content="no-referrer">
+
+  <script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
+
+  <script>
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@clappr/player@0.8/dist/clappr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@swarmcloud/hls/p2p-engine.min.js"></script>
+
+  <link rel="stylesheet" href="https://la12hd.com/cssm.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+    }
+
+    #player {
+      width: 100%;
+      height: 500px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    #player video {
+      object-fit: contain;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="player"></div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const source = params.get("url");
+
+      if (!source) {
+        document.getElementById("player").innerHTML =
+          '<div style="color:white;text-align:center;padding:30px;">URL video tidak ditemukan.</div>';
+        return;
+      }
+
+      const player = new Clappr.Player({
+        source: source,
+        parentId: "#player",
+        width: "100%",
+        height: "100%",
+        autoPlay: true,
+        mute: false,
+        playback: {
+          playInline: true
+        },
+        mediacontrol: {
+          seekbar: "#D4ED31",
+          buttons: "#FFFFFF"
+        }
+      });
+
+      window.clapprPlayer = player;
+    })();
+  </script>
+</body>
+</html>
