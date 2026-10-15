@@ -1,0 +1,166 @@
+
+<!-- Plyr CSS -->
+<link rel="stylesheet"
+ href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css">
+
+<style>
+  .stream-player-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #000;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .stream-player-container .plyr {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    --plyr-color-main: #e50914;
+    --plyr-video-background: #000;
+  }
+
+  .stream-player-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #stream-status {
+    color: #aaa;
+    background: #000;
+    font: 13px Arial, sans-serif;
+    text-align: center;
+    padding: 8px;
+    margin: 0;
+  }
+
+  .stream-player-container:fullscreen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
+
+  @media (max-width: 600px) {
+    .stream-player-container {
+      border-radius: 0;
+    }
+  }
+</style>
+
+<div class="stream-player-container">
+  <video
+    id="stream-player"
+    controls
+    playsinline
+    preload="metadata">
+  </video>
+</div>
+
+<p id="stream-status">Menunggu sumber video...</p>
+
+<!-- HLS.js -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+
+<!-- Plyr -->
+<script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.min.js"></script>
+
+<script>
+(function () {
+  const video = document.getElementById('stream-player');
+  const status = document.getElementById('stream-status');
+
+  // Ambil URL video dari parameter ?url=
+  const params = new URLSearchParams(window.location.search);
+  const source = params.get('url');
+
+  // Inisialisasi tampilan Plyr
+  const player = new Plyr(video, {
+    controls: [
+      'play-large',
+      'play',
+      'progress',
+      'current-time',
+      'duration',
+      'mute',
+      'volume',
+      'fullscreen'
+    ],
+    settings: [],
+    autoplay: false,
+    clickToPlay: true,
+    hideControls: true,
+    resetOnEnd: false
+  });
+
+  function showStatus(message) {
+    status.textContent = message;
+  }
+
+  if (!source) {
+    showStatus('URL video belum dimasukkan.');
+    return;
+  }
+
+  let mediaUrl;
+
+  try {
+    mediaUrl = new URL(source);
+
+    if (mediaUrl.protocol !== 'https:') {
+      throw new Error('HTTPS diperlukan');
+    }
+  } catch (error) {
+    showStatus('URL video tidak valid.');
+    return;
+  }
+
+  const path = mediaUrl.pathname.toLowerCase();
+
+  if (path.endsWith('.m3u8')) {
+    // HLS: gunakan pemutar bawaan browser jika tersedia
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = mediaUrl.href;
+    } else if (window.Hls && Hls.isSupported()) {
+      const hls = new Hls();
+
+      hls.loadSource(mediaUrl.href);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        showStatus('Streaming siap diputar.');
+      });
+
+      hls.on(Hls.Events.ERROR, function (_, data) {
+        if (data.fatal) {
+          showStatus(
+            'Streaming gagal dimuat. Periksa URL, token, atau akses server.'
+          );
+          hls.destroy();
+        }
+      });
+    } else {
+      showStatus('Browser ini tidak mendukung HLS.');
+      return;
+    }
+  } else if (/\.(mp4|webm)$/i.test(path)) {
+    video.src = mediaUrl.href;
+  } else {
+    showStatus('Format tidak dikenali. Gunakan M3U8 atau MP4.');
+    return;
+  }
+
+  video.addEventListener('loadedmetadata', function () {
+    showStatus('');
+  });
+
+  video.addEventListener('playing', function () {
+    showStatus('');
+  });
+
+  video.addEventListener('error', function () {
+    showStatus('Video tidak dapat diputar.');
+  });
+})();
+</script>
