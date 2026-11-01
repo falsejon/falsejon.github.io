@@ -1,75 +1,60 @@
 
 <div id="football-player-v2">
-
   <video id="fpv-video" playsinline webkit-playsinline preload="metadata"></video>
 
   <div class="fpv-overlay">
 
-    <!-- CENTER CONTROLS -->
     <div class="fpv-center">
-
-      <button type="button" id="fpv-back" class="fpv-skip" aria-label="Mundur 10 detik">
+      <button type="button" id="fpv-back" class="fpv-skip">
         <svg viewBox="0 0 64 64">
           <path d="M14 23V8M14 23L29 22M14 23A23 23 0 1 1 11 42"/>
           <text x="32" y="41">10</text>
         </svg>
       </button>
 
-      <button type="button" id="fpv-main-play" class="fpv-main-play" aria-label="Play">
-        <svg viewBox="0 0 64 64" class="fpv-play-icon">
-          <path d="M18 9L54 32L18 55Z"/>
-        </svg>
+      <button type="button" id="fpv-main-play" class="fpv-main-play">
+        <svg viewBox="0 0 64 64"><path d="M18 9L54 32L18 55Z"/></svg>
       </button>
 
-      <button type="button" id="fpv-forward" class="fpv-skip" aria-label="Maju 10 detik">
+      <button type="button" id="fpv-forward" class="fpv-skip">
         <svg viewBox="0 0 64 64">
           <path d="M50 23V8M50 23L35 22M50 23A23 23 0 1 0 53 42"/>
           <text x="32" y="41">10</text>
         </svg>
       </button>
-
     </div>
 
-    <!-- BOTTOM CONTROLS -->
     <div class="fpv-bottom">
-
-      <input type="range" id="fpv-seek" min="0" max="1000" value="0" aria-label="Progress video">
+      <input type="range" id="fpv-seek" min="0" max="1000" value="0">
 
       <div class="fpv-toolbar">
 
-        <button type="button" id="fpv-play" aria-label="Play">
-          <svg viewBox="0 0 64 64" class="fpv-play-icon">
-            <path d="M18 9L54 32L18 55Z"/>
-          </svg>
+        <button type="button" id="fpv-play">
+          <svg viewBox="0 0 64 64"><path d="M18 9L54 32L18 55Z"/></svg>
         </button>
 
         <div class="fpv-volume-box">
-
-          <button type="button" id="fpv-mute" aria-label="Volume">
+          <button type="button" id="fpv-mute">
             <svg viewBox="0 0 64 64">
               <path d="M5 24H17L36 9V55L17 40H5Z"/>
               <path d="M44 20Q57 32 44 44M49 10Q69 32 49 54" fill="none"/>
             </svg>
           </button>
-
           <input type="range" id="fpv-volume" min="0" max="1" step="0.05" value="1">
         </div>
 
-        <div class="fpv-live">
-          <span></span> LIVE
-        </div>
+        <div class="fpv-live"><span></span> LIVE</div>
 
         <div class="fpv-spacer"></div>
 
-        <button type="button" id="fpv-refresh" aria-label="Refresh">
+        <button type="button" id="fpv-refresh">
           <svg viewBox="0 0 64 64">
             <path d="M52 17V5M52 17H40M52 17A25 25 0 1 0 55 39"/>
           </svg>
         </button>
 
         <div class="fpv-settings">
-
-          <button type="button" id="fpv-settings-btn" aria-label="Settings">
+          <button type="button" id="fpv-settings-btn">
             <svg viewBox="0 0 64 64">
               <path d="M27 5H37L39 12Q43 13 46 16L53 13L59 22L54 28V36L59 42L53 51L46 48Q43 51 39 52L37 59H27L25 52Q21 51 18 48L11 51L5 42L10 36V28L5 22L11 13L18 16Q21 13 25 12Z"/>
               <circle cx="32" cy="32" r="9" fill="#222"/>
@@ -78,13 +63,11 @@
 
           <div id="fpv-menu">
             <strong>SETTINGS</strong>
-
             <label>Kualitas Video</label>
             <select id="fpv-quality">
               <option value="-1">Auto</option>
             </select>
-
-            <label>Kecepatan Video</label>
+            <label>Kecepatan</label>
             <select id="fpv-speed">
               <option value="0.5">0.5x</option>
               <option value="0.75">0.75x</option>
@@ -94,19 +77,16 @@
               <option value="2">2x</option>
             </select>
           </div>
-
         </div>
 
-        <button type="button" id="fpv-fullscreen" aria-label="Fullscreen">
+        <button type="button" id="fpv-fullscreen">
           <svg viewBox="0 0 64 64">
             <path d="M8 25V8H25M39 8H56V25M56 39V56H39M25 56H8V39"/>
           </svg>
         </button>
-
       </div>
     </div>
 
-    <!-- ERROR MESSAGE -->
     <div id="fpv-error">
       <span id="fpv-error-text"></span>
       <button type="button" id="fpv-retry">COBA LAGI</button>
@@ -145,7 +125,6 @@
 
 #football-player-v2 button {
   appearance:none;
-  -webkit-appearance:none;
   border:0;
   outline:0;
   background:transparent;
@@ -157,7 +136,6 @@
   justify-content:center;
   font-size:0;
   line-height:1;
-  flex-shrink:0;
 }
 
 #football-player-v2 button svg {
@@ -176,12 +154,7 @@
   position:absolute;
   inset:0;
   pointer-events:none;
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,.80) 0%,
-    rgba(0,0,0,.12) 35%,
-    transparent 65%
-  );
+  background:linear-gradient(to top,rgba(0,0,0,.8),transparent 65%);
   transition:opacity .3s;
 }
 
@@ -196,8 +169,6 @@
   pointer-events:none;
 }
 
-/* CENTER */
-
 .fpv-center {
   position:absolute;
   top:50%;
@@ -211,8 +182,8 @@
 }
 
 .fpv-center button {
-  width:48px;
-  height:48px;
+  width:45px;
+  height:45px;
 }
 
 .fpv-center .fpv-main-play {
@@ -221,8 +192,8 @@
 }
 
 .fpv-skip svg {
-  fill:none !important;
-  stroke:#d9f000 !important;
+  fill:none!important;
+  stroke:#d9f000!important;
   filter:drop-shadow(0 2px 4px #000);
 }
 
@@ -234,8 +205,6 @@
   text-anchor:middle;
 }
 
-/* BOTTOM */
-
 .fpv-bottom {
   position:absolute;
   bottom:0;
@@ -246,11 +215,10 @@
 
 #fpv-seek {
   appearance:none;
-  -webkit-appearance:none;
   display:block;
   width:100%;
   height:6px;
-  margin:0 0 24px;
+  margin:0 0 22px;
   border-radius:10px;
   background:#777;
   accent-color:#d9f000;
@@ -259,15 +227,15 @@
 
 #fpv-seek::-webkit-slider-thumb {
   appearance:none;
-  width:21px;
-  height:21px;
+  width:19px;
+  height:19px;
   border-radius:50%;
   background:#fff;
 }
 
 #fpv-seek::-moz-range-thumb {
-  width:21px;
-  height:21px;
+  width:19px;
+  height:19px;
   border:0;
   border-radius:50%;
   background:#fff;
@@ -276,48 +244,48 @@
 .fpv-toolbar {
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:14px;
   min-height:32px;
 }
 
 .fpv-toolbar > button,
 .fpv-settings > button {
-  width:30px;
-  height:30px;
+  width:29px;
+  height:29px;
+  flex-shrink:0;
 }
 
 .fpv-volume-box {
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:8px;
 }
 
 #fpv-mute {
-  width:35px;
-  height:35px;
+  width:33px;
+  height:33px;
 }
 
 #fpv-volume {
   appearance:none;
-  -webkit-appearance:none;
-  width:75px;
+  width:70px;
   height:6px;
-  border-radius:10px;
   background:#d9f000;
+  border-radius:10px;
   cursor:pointer;
 }
 
 #fpv-volume::-webkit-slider-thumb {
   appearance:none;
-  width:20px;
-  height:20px;
+  width:17px;
+  height:17px;
   border-radius:50%;
   background:#d9f000;
 }
 
 #fpv-volume::-moz-range-thumb {
-  width:20px;
-  height:20px;
+  width:17px;
+  height:17px;
   border:0;
   border-radius:50%;
   background:#d9f000;
@@ -326,25 +294,23 @@
 .fpv-live {
   display:flex;
   align-items:center;
-  gap:8px;
-  font-size:14px;
+  gap:7px;
+  font-size:13px;
   font-weight:bold;
   white-space:nowrap;
 }
 
 .fpv-live span {
-  width:13px;
-  height:13px;
+  width:12px;
+  height:12px;
   border-radius:50%;
   background:#ed2448;
 }
 
 .fpv-spacer {
   flex:1;
-  min-width:4px;
+  min-width:3px;
 }
-
-/* SETTINGS */
 
 .fpv-settings {
   position:relative;
@@ -355,7 +321,7 @@
   display:none;
   position:absolute;
   bottom:43px;
-  right:-35px;
+  right:-30px;
   width:175px;
   padding:13px;
   background:rgba(20,20,20,.98);
@@ -392,18 +358,16 @@
   font-size:12px;
 }
 
-/* ERROR */
-
 #fpv-error {
   display:none;
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.88);
+  background:rgba(0,0,0,.9);
   z-index:20;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  gap:15px;
+  gap:14px;
   padding:20px;
   text-align:center;
   font-size:13px;
@@ -419,113 +383,74 @@
   font-weight:bold;
 }
 
-/* MOBILE */
-
 @media(max-width:500px) {
-  .fpv-toolbar {
-    gap:9px;
-  }
-
+  .fpv-toolbar {gap:8px}
   .fpv-toolbar > button,
-  .fpv-settings > button {
-    width:25px;
-    height:25px;
-  }
-
-  #fpv-mute {
-    width:27px;
-    height:27px;
-  }
-
-  #fpv-volume {
-    width:48px;
-  }
-
-  .fpv-center button {
-    width:38px;
-    height:38px;
-  }
-
-  .fpv-center .fpv-main-play {
-    width:50px;
-    height:50px;
-  }
-
-  .fpv-toolbar {
-    min-height:27px;
-  }
-
-  .fpv-live {
-    font-size:11px;
-    gap:5px;
-  }
-
-  .fpv-live span {
-    width:10px;
-    height:10px;
-  }
-
-  .fpv-bottom {
-    padding:0 9px 9px;
-  }
-
-  #fpv-seek {
-    margin-bottom:17px;
-  }
+  .fpv-settings > button {width:24px;height:24px}
+  #fpv-mute {width:26px;height:26px}
+  #fpv-volume {width:42px}
+  .fpv-center button {width:37px;height:37px}
+  .fpv-center .fpv-main-play {width:50px;height:50px}
+  .fpv-live {font-size:11px;gap:5px}
+  .fpv-live span {width:10px;height:10px}
+  .fpv-bottom {padding:0 9px 9px}
+  #fpv-seek {margin-bottom:16px}
 }
-
-/* FULLSCREEN */
 
 #football-player-v2:fullscreen {
   width:100%;
   height:100%;
   aspect-ratio:auto;
   border-radius:0;
-  background:#000;
 }
 
 #football-player-v2:fullscreen #fpv-video {
   width:100%;
   height:100%;
 }
-
-#football-player-v2:fullscreen .fpv-overlay {
-  position:absolute;
-}
 </style>
 
 <script>
 (function(){
-
-  const player = document.getElementById("football-player-v2");
+  const player=document.getElementById("football-player-v2");
   if(!player || player.dataset.initialized) return;
-  player.dataset.initialized = "yes";
+  player.dataset.initialized="yes";
 
-  const $ = id => document.getElementById(id);
-  const video = $("fpv-video");
+  const $=id=>document.getElementById(id);
+  const video=$("fpv-video");
 
-  // SUMBER STREAMING
-  const STREAM_URL = Source,
+  // AMBIL URL DARI PARAMETER ?url=
+  const params=new URLSearchParams(window.location.search);
+  const STREAM_URL=params.get("url") || "";
 
-  let hls = null;
-  let hideTimer = null;
+  let hls=null;
+  let hideTimer=null;
 
-  const playSVG = '<svg viewBox="0 0 64 64"><path d="M18 9L54 32L18 55Z"/></svg>';
-  const pauseSVG = '<svg viewBox="0 0 64 64"><path d="M17 10H27V54H17ZM37 10H47V54H37Z"/></svg>';
+  const playSVG='<svg viewBox="0 0 64 64"><path d="M18 9L54 32L18 55Z"/></svg>';
+  const pauseSVG='<svg viewBox="0 0 64 64"><path d="M17 10H27V54H17ZM37 10H47V54H37Z"/></svg>';
 
-  function updatePlayIcons(){
-    const icon = video.paused ? playSVG : pauseSVG;
-    $("fpv-play").innerHTML = icon;
-    $("fpv-main-play").innerHTML = icon;
+  function validURL(url){
+    try{
+      const u=new URL(url);
+      return u.protocol==="https:" || u.protocol==="http:";
+    }catch(e){
+      return false;
+    }
+  }
+
+  function updateIcons(){
+    const icon=video.paused?playSVG:pauseSVG;
+    $("fpv-play").innerHTML=icon;
+    $("fpv-main-play").innerHTML=icon;
   }
 
   function showError(message){
-    $("fpv-error-text").textContent = message;
-    $("fpv-error").style.display = "flex";
+    $("fpv-error-text").textContent=message;
+    $("fpv-error").style.display="flex";
   }
 
   function clearError(){
-    $("fpv-error").style.display = "none";
+    $("fpv-error").style.display="none";
   }
 
   function loadStream(){
@@ -533,16 +458,23 @@
 
     if(hls){
       hls.destroy();
-      hls = null;
+      hls=null;
     }
 
     video.pause();
     video.removeAttribute("src");
     video.load();
 
-    if(window.Hls && Hls.isSupported()){
+    if(!validURL(STREAM_URL)){
+      showError("URL streaming tidak ditemukan atau tidak valid. Gunakan format ?url=LINK-STREAMING");
+      updateIcons();
+      return;
+    }
 
-      hls = new Hls({
+    const isHLS=/\.m3u8(?:$|[?#])/i.test(STREAM_URL);
+
+    if(isHLS && window.Hls && Hls.isSupported()){
+      hls=new Hls({
         enableWorker:true,
         lowLatencyMode:true,
         liveSyncDurationCount:3,
@@ -558,135 +490,129 @@
 
       hls.on(Hls.Events.ERROR,function(event,data){
         if(data.fatal){
-          if(data.type === Hls.ErrorTypes.MEDIA_ERROR){
+          if(data.type===Hls.ErrorTypes.MEDIA_ERROR){
             hls.recoverMediaError();
-          } else {
-            showError("Streaming gagal dimuat. Periksa URL, token, CORS, atau akses server.");
+          }else{
+            showError("Streaming gagal dimuat. Periksa URL, token, CORS atau akses server.");
           }
         }
       });
 
-    } else if(video.canPlayType("application/vnd.apple.mpegurl")){
-      video.src = STREAM_URL;
+    }else if(isHLS && video.canPlayType("application/vnd.apple.mpegurl")){
+      video.src=STREAM_URL;
       video.load();
-    } else {
-      showError("Browser tidak mendukung pemutaran HLS.");
+
+    }else if(!isHLS){
+      video.src=STREAM_URL;
+      video.load();
+
+    }else{
+      showError("Browser tidak mendukung HLS.");
     }
 
-    updatePlayIcons();
+    updateIcons();
   }
 
   function togglePlay(){
     if(video.paused){
       clearError();
       video.play().catch(function(){
-        showError("Video tidak dapat diputar. Periksa koneksi atau akses streaming.");
+        showError("Video tidak dapat diputar. Periksa URL dan akses streaming.");
       });
-    } else {
+    }else{
       video.pause();
     }
   }
 
-  $("fpv-play").onclick = togglePlay;
-  $("fpv-main-play").onclick = togglePlay;
-  video.onclick = togglePlay;
+  $("fpv-play").onclick=togglePlay;
+  $("fpv-main-play").onclick=togglePlay;
+  video.onclick=togglePlay;
 
-  video.onplay = updatePlayIcons;
-  video.onpause = updatePlayIcons;
+  video.onplay=updateIcons;
+  video.onpause=updateIcons;
 
-  // REWIND 10 SECONDS
-  $("fpv-back").onclick = function(){
+  $("fpv-back").onclick=function(){
     if(video.seekable.length){
-      const start = video.seekable.start(0);
-      video.currentTime = Math.max(start,video.currentTime-10);
-    } else if(Number.isFinite(video.duration)){
-      video.currentTime = Math.max(0,video.currentTime-10);
+      video.currentTime=Math.max(video.seekable.start(0),video.currentTime-10);
+    }else if(Number.isFinite(video.duration)){
+      video.currentTime=Math.max(0,video.currentTime-10);
     }
   };
 
-  // FORWARD 10 SECONDS
-  $("fpv-forward").onclick = function(){
+  $("fpv-forward").onclick=function(){
     if(video.seekable.length){
-      const end = video.seekable.end(video.seekable.length-1);
-      video.currentTime = Math.min(end,video.currentTime+10);
-    } else if(Number.isFinite(video.duration)){
-      video.currentTime = Math.min(video.duration,video.currentTime+10);
+      const end=video.seekable.end(video.seekable.length-1);
+      video.currentTime=Math.min(end,video.currentTime+10);
+    }else if(Number.isFinite(video.duration)){
+      video.currentTime=Math.min(video.duration,video.currentTime+10);
     }
   };
 
-  // PROGRESS BAR
   function updateProgress(){
-    let start = 0;
-    let end = video.duration;
+    let start=0;
+    let end=video.duration;
 
     if(video.seekable.length){
-      start = video.seekable.start(0);
-      end = video.seekable.end(video.seekable.length-1);
+      start=video.seekable.start(0);
+      end=video.seekable.end(video.seekable.length-1);
     }
 
-    if(Number.isFinite(end) && end > start){
-      const percent = Math.max(0,Math.min(100,
-        ((video.currentTime-start)/(end-start))*100
+    if(Number.isFinite(end)&&end>start){
+      const p=Math.max(0,Math.min(100,
+        (video.currentTime-start)/(end-start)*100
       ));
-
-      $("fpv-seek").value = percent*10;
-      $("fpv-seek").style.background =
-        "linear-gradient(to right,#d9f000 "+percent+"%,#777 "+percent+"%)";
+      $("fpv-seek").value=p*10;
+      $("fpv-seek").style.background=
+        "linear-gradient(to right,#d9f000 "+p+"%,#777 "+p+"%)";
     }
   }
 
-  video.ontimeupdate = updateProgress;
-  video.onprogress = updateProgress;
-  video.onloadedmetadata = updateProgress;
+  video.ontimeupdate=updateProgress;
+  video.onprogress=updateProgress;
+  video.onloadedmetadata=updateProgress;
 
-  $("fpv-seek").oninput = function(){
-    let start = 0;
-    let end = video.duration;
+  $("fpv-seek").oninput=function(){
+    let start=0;
+    let end=video.duration;
 
     if(video.seekable.length){
-      start = video.seekable.start(0);
-      end = video.seekable.end(video.seekable.length-1);
+      start=video.seekable.start(0);
+      end=video.seekable.end(video.seekable.length-1);
     }
 
-    if(Number.isFinite(end) && end > start){
-      video.currentTime = start + (this.value/1000)*(end-start);
+    if(Number.isFinite(end)&&end>start){
+      video.currentTime=start+(this.value/1000)*(end-start);
     }
   };
 
-  // VOLUME
-  $("fpv-volume").oninput = function(){
-    video.volume = Number(this.value);
-    video.muted = false;
+  $("fpv-volume").oninput=function(){
+    video.volume=Number(this.value);
+    video.muted=false;
     updateMute();
   };
 
-  $("fpv-mute").onclick = function(){
-    video.muted = !video.muted;
+  $("fpv-mute").onclick=function(){
+    video.muted=!video.muted;
     updateMute();
   };
 
   function updateMute(){
-    $("fpv-mute").innerHTML = video.muted || video.volume === 0
-      ? '<svg viewBox="0 0 64 64"><path d="M5 24H17L36 9V55L17 40H5Z"/><path d="M44 21L59 43M59 21L44 43" fill="none"/></svg>'
-      : '<svg viewBox="0 0 64 64"><path d="M5 24H17L36 9V55L17 40H5Z"/><path d="M44 20Q57 32 44 44M49 10Q69 32 49 54" fill="none"/></svg>';
+    $("fpv-mute").innerHTML=video.muted||video.volume===0
+      ?'<svg viewBox="0 0 64 64"><path d="M5 24H17L36 9V55L17 40H5Z"/><path d="M44 21L59 43M59 21L44 43" fill="none"/></svg>'
+      :'<svg viewBox="0 0 64 64"><path d="M5 24H17L36 9V55L17 40H5Z"/><path d="M44 20Q57 32 44 44M49 10Q69 32 49 54" fill="none"/></svg>';
   }
 
-  // REFRESH
-  $("fpv-refresh").onclick = loadStream;
+  $("fpv-refresh").onclick=loadStream;
 
-  // FULLSCREEN
-  $("fpv-fullscreen").onclick = function(){
+  $("fpv-fullscreen").onclick=function(){
     if(!document.fullscreenElement){
-      if(player.requestFullscreen){
-        player.requestFullscreen();
-      }
-    } else {
-      document.exitFullscreen();
+      player.requestFullscreen?.();
+    }else{
+      document.exitFullscreen?.();
     }
   };
 
-  // SETTINGS
-  $("fpv-settings-btn").onclick = function(e){
+  $("fpv-settings-btn").onclick=function(e){
     e.stopPropagation();
     $("fpv-menu").classList.toggle("show");
   };
@@ -697,35 +623,33 @@
     }
   });
 
-  $("fpv-speed").onchange = function(){
-    video.playbackRate = Number(this.value);
+  $("fpv-speed").onchange=function(){
+    video.playbackRate=Number(this.value);
   };
 
   function updateQuality(){
-    if(!hls) return;
-
-    const select = $("fpv-quality");
-    select.innerHTML = '<option value="-1">Auto</option>';
+    if(!hls)return;
+    const select=$("fpv-quality");
+    select.innerHTML='<option value="-1">Auto</option>';
 
     hls.levels.forEach(function(level,index){
-      const option = document.createElement("option");
-      option.value = index;
-      option.textContent = level.height ? level.height+"p" : "Level "+index;
+      const option=document.createElement("option");
+      option.value=index;
+      option.textContent=level.height?level.height+"p":"Level "+index;
       select.appendChild(option);
     });
   }
 
-  $("fpv-quality").onchange = function(){
-    if(hls) hls.currentLevel = Number(this.value);
+  $("fpv-quality").onchange=function(){
+    if(hls)hls.currentLevel=Number(this.value);
   };
 
-  // AUTO HIDE CONTROLS
   function showControls(){
     player.classList.remove("fpv-hidden");
     clearTimeout(hideTimer);
 
     if(!video.paused){
-      hideTimer = setTimeout(function(){
+      hideTimer=setTimeout(function(){
         $("fpv-menu").classList.remove("show");
         player.classList.add("fpv-hidden");
       },3000);
@@ -737,9 +661,9 @@
   video.addEventListener("play",showControls);
   video.addEventListener("pause",showControls);
 
-  $("fpv-retry").onclick = loadStream;
+  $("fpv-retry").onclick=loadStream;
 
   loadStream();
-
 })();
-</script>
+    </script>
+    0
